@@ -4,5 +4,4 @@ module.exports = async ({ github, context, core }) => {
     repo: context.repo.repo,
   });
   console.log("deployments ? ", deployments);
-  // core.exportVariable("author", commit.data.commit.author.email);
 };

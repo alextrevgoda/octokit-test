@@ -1,4 +1,4 @@
-name: Create deployments
+name: Create deployment
 
 concurrency:
   group: preview-${{ github.head_ref }}
