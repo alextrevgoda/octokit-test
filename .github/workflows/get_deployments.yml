@@ -13,6 +13,7 @@ on:
         required: true
 env:
   NODE_VERSION: 16
+  DEPLOYMENT_NAME: ${{ github.event.inputs.environment }}
 
 jobs:
   test-job:
@@ -30,8 +31,6 @@ jobs:
 
       - name: Run script
         uses: actions/github-script@v6
-        env:
-          DEPLOYMENT_NAME: ${{ github.event.inputs.environment }}
         with:
           script: |
             const script = require('./.github/actions/getDeployments.js')
