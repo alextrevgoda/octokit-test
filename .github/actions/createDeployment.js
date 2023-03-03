@@ -3,6 +3,6 @@ module.exports = async ({ github, context }) => {
     owner: context.repo.owner,
     repo: context.repo.repo,
     ref: process.env.GITHUB_SHA,
-    environment: process.env.environment,
+    environment: process.env.DEPLOYMENT_NAME,
   });
 };
