@@ -6,7 +6,11 @@ concurrency:
 
 on:
   workflow_dispatch:
-
+    inputs:
+      environment:
+        type: environment
+        description: "Deployment name"
+        required: true
 env:
   NODE_VERSION: 16
 
@@ -29,4 +33,4 @@ jobs:
         with:
           script: |
             const script = require('./.github/actions/getDeployments.js')
-            script({ github, context })
+            const res = await script({ github, context, core })

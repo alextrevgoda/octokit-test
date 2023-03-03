@@ -3,5 +3,8 @@ module.exports = async ({ github, context, core }) => {
     owner: context.repo.owner,
     repo: context.repo.repo,
   });
-  console.log("deployments ? ", deployments);
+  const searchDeployment = deployments.data.find(
+    (deployment) => deployment.environment === github.event.inputs.environment
+  );
+  console.log("searchDeployment ? ", searchDeployment);
 };

@@ -35,4 +35,4 @@ jobs:
         with:
           script: |
             const script = require('./.github/actions/createDeployment.js')
-            script({ github, context })
+            script({ github, context, core })
