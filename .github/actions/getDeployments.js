@@ -4,7 +4,7 @@ module.exports = async ({ github, context, core }) => {
     repo: context.repo.repo,
   });
   const searchDeployment = deployments.data.find(
-    (deployment) => deployment.environment === github.event.inputs.environment
+    (deployment) => deployment.environment === process.env.DEPLOYMENT_NAME
   );
   console.log("searchDeployment ? ", searchDeployment);
 };
