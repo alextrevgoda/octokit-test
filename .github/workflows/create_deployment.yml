@@ -1,23 +1,21 @@
-name: Test action
+name: Create deployments
 
 concurrency:
   group: preview-${{ github.head_ref }}
   cancel-in-progress: true
 
 on:
-  pull_request:
-    types: [opened]
   workflow_dispatch:
     inputs:
-      pr_number:
-        description: "PR number (not prefixed, plain number)"
+      environment:
+        description: "deployment name"
         required: true
 
 env:
   NODE_VERSION: 16
 
 jobs:
-  test-job:
+  create-deployment:
     env:
       BRANCH_NAME: ${{ (github.head_ref) }}
     runs-on: ubuntu-latest
@@ -30,9 +28,11 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Create import map override
+      - name: Run script
         uses: actions/github-script@v6
+        env:
+          DEPLOYMENT_NAME: ${{ github.event.inputs.environment }}
         with:
           script: |
-            const script = require('./.github/actions/script.js')
-            script({github, context})
+            const script = require('./.github/actions/createDeployment.js')
+            script({ github, context })
