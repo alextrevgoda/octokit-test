@@ -31,9 +31,11 @@ jobs:
         id: get_deploy_details
         shell: bash
         run: |
-          DEPLOYMENT_NAME="pr-${{ env.DEPLOYMENT_NAME }}"
-          echo "deploymentName=$($DEPLOYMENT_NAME || env.DEPLOYMENT_NAME)" >> $GITHUB_OUTPUT
-          echo $($DEPLOYMENT_NAME || env.DEPLOYMENT_NAME)
+          DEPLOYMENT_NAME_FROM_INPUT="pr-${{ env.DEPLOYMENT_NAME }}"
+          DEPLOYMENT_NAME_FROM_SCRIPT="${{ env.DEPLOYMENT_NAME }}"
+
+          echo "deploymentName=${ DEPLOYMENT_NAME_FROM_INPUT || DEPLOYMENT_NAME_FROM_SCRIPT }" >> $GITHUB_OUTPUT
+          echo ${ DEPLOYMENT_NAME_FROM_INPUT || DEPLOYMENT_NAME_FROM_SCRIPT }
 
       - name: Run script
         uses: actions/github-script@v6
