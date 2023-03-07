@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           DEPLOYMENT_NAME="pr-${{ env.DEPLOYMENT_NAME }}"
-          echo "deploymentName=${{ DEPLOYMENT_NAME }}" >> $GITHUB_OUTPUT
+          echo "deploymentName=$($DEPLOYMENT_NAME || env.DEPLOYMENT_NAME)" >> $GITHUB_OUTPUT
 
       - name: Run script
         uses: actions/github-script@v6
