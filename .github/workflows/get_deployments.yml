@@ -17,8 +17,6 @@ env:
 
 jobs:
   test-job:
-    env:
-      BRANCH_NAME: ${{ (github.head_ref) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,6 +26,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
+
+      - name: Get deployment details
+        id: get_deploy_details
+        shell: bash
+        run: |
+          DEPLOYMENT_NAME: "pr-${{ env.DEPLOYMENT_NAME }}"
+          echo "deploymentName=${{ DEPLOYMENT_NAME }}" >> $GITHUB_OUTPUT
 
       - name: Run script
         uses: actions/github-script@v6
